@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Anatomy: The Circulatory System</title>
+    <!--
+        This is a redefined, premium-level guide for the human circulatory system.
+        The design is inspired by modern, clean aesthetics with a focus on
+        improved navigation, seamless interactive features, and a sophisticated feel.
+    -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa; /* Light background */
+            color: #1f2937; /* Dark text for contrast */
+            scroll-behavior: smooth;
+        }
+        .header-bg {
+            background-image: linear-gradient(to right, #1a237e, #4527a0);
+            border-bottom: 2px solid #5a5a5a;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white for frosted glass effect */
+            backdrop-filter: blur(20px);
+            border-radius: 1.5rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border: 1px solid rgba(229, 231, 235, 0.5); /* Subtle light border */
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1), 0 8px 12px -6px rgba(0, 0, 0, 0.05);
+        }
+        .cta-button {
+            transition: all 0.2s ease-in-out;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            background-color: #4f46e5;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .cta-button:hover {
+            background-color: #4338ca;
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+        .modal-content {
+            background-color: #ffffff;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 1.5rem;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s;
+        }
+        .close-button {
+            color: #555;
+            float: right;
+            font-size: 32px;
+            font-weight: 300;
+            line-height: 1;
+            transition: color 0.2s ease;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .text-indigo-400 { color: #4f46e5; }
+        .text-teal-400 { color: #14b8a6; }
+        .text-fuchsia-400 { color: #c026d3; }
+        .text-green-400 { color: #16a34a; }
+        .text-purple-400 { color: #9333ea; }
+        .bg-indigo-500 { background-color: #4f46e5; }
+        .bg-fuchsia-500 { background-color: #c026d3; }
+        .bg-purple-500 { background-color: #9333ea; }
+        .bg-green-500 { background-color: #16a34a; }
+        .bg-teal-500 { background-color: #14b8a6; }
+        .bg-gray-700 { background-color: #f3f4f6; }
+        .text-gray-200 { color: #4b5563; }
+        .text-gray-300 { color: #6b7280; }
+        .text-gray-400 { color: #9ca3af; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <!-- Header Section -->
+        <header class="header-bg text-white rounded-3xl p-6 md:p-12 shadow-2xl mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-3">The Human Circulatory System: An Adventure!</h1>
+            <p class="text-lg md:text-xl opacity-90 font-light mb-4">
+                Welcome, future anatomist! This guide is your exclusive pass to a deep, detailed, and visually stunning journey through the body's most vital transport network. Let's begin.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <button onclick="generateAnatomyFact()" class="bg-purple-400 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                    Anatomy Fact of the Day ✨
+                </button>
+                <div id="fact-container" class="mt-4 text-white font-light p-4 bg-white bg-opacity-10 rounded-xl hidden transition-all duration-300"></div>
+            </div>
+        </header>
+
+        <!-- Navigation Menu - Quick Links -->
+        <nav class="bg-white card shadow-xl p-6 mb-12">
+            <h3 class="text-xl font-bold text-indigo-400 mb-4">Jump to Section</h3>
+            <ul class="flex flex-wrap gap-4 text-sm md:text-base">
+                <li><a href="#heart-section" class="text-indigo-400 hover:text-indigo-600 transition-colors duration-200">The Heart</a></li>
+                <li><a href="#arteries-section" class="text-indigo-400 hover:text-indigo-600 transition-colors duration-200">The Arteries</a></li>
+                <li><a href="#veins-section" class="text-indigo-400 hover:text-indigo-600 transition-colors duration-200">The Veins</a></li>
+                <li><a href="#key-terms-section" class="text-indigo-400 hover:text-indigo-600 transition-colors duration-200">Key Terms</a></li>
+                <li><a href="#tutor-section" class="text-teal-400 hover:text-teal-600 transition-colors duration-200">AI Tutor</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Mission 1: The Heart - The Engine Room -->
+            <section class="bg-white card p-6 md:p-8 shadow-xl" id="heart-section">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-3xl font-bold text-indigo-700">Mission 1: The Heart</h2>
+                    <button onclick="document.getElementById('key-terms-section').scrollIntoView({ behavior: 'smooth' });" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button hidden md:inline-block">
+                        Key Terms
+                    </button>
+                </div>
+                <p class="text-gray-600 mb-6 font-light">
+                    Our journey begins with the heart, the central pump that powers the entire network. Understanding its structure and function is the most crucial first step.
+                </p>
+
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <button onclick="generateQuiz('the heart and its functions')" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                        Sparkle Quiz ✨
+                    </button>
+                    <button onclick="speakSection('heart-section-content')" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                        Listen to Section 🔊
+                    </button>
+                    <button onclick="generateFlashcards('the heart and its functions', 'heart-flashcards-container')" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                        Create Flashcards ✨
+                    </button>
+                    <button onclick="generateSummary('heart-section-content', 'heart-summary-container')" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                        Quick Summary ✨
+                    </button>
+                </div>
+
+                <div id="heart-section-content">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">1.1 Location, Shape, and Protective Layers</h3>
+                        <p class="text-gray-700 mb-4 font-light">
+                            The heart is a hollow, muscular organ with a conical shape, located in the anterior (middle) mediastinum. Its base is anchored by the great vessels on its superior and posterior surfaces, while the apex points anteriorly, inferiorly, and to the left, approximately at the 5th intercostal space. This entire structure is housed within a protective, double-layered, fibroserous sac called the **pericardium**.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 pl-4 space-y-1 font-light">
+                            <li>**Fibrous Pericardium**: This is the tough, inelastic outer layer composed of connective tissue. It attaches inferiorly to the central tendon of the diaphragm and superiorly is continuous with the outer layers of the great vessels. Its primary role is to anchor the heart and prevent over-distention.</li>
+                            <li>**Serous Pericardium**: A thin, delicate inner layer with two parts. The **parietal layer** lines the inner surface of the fibrous pericardium. The **visceral layer** is the outer layer of the heart wall itself, also known as the **epicardium**.</li>
+                            <li>**Pericardial Cavity**: The potential space between the parietal and visceral layers of the serous pericardium. It contains a small amount of serous fluid that lubricates the surfaces, allowing the heart to beat with minimal friction.</li>
+                            <li>**Innervation**: The main nerve supply to the pericardium is from the **phrenic nerve** (C3–C5), which is why inflammation of the pericardium (pericarditis) can cause referred pain to the shoulder and supraclavicular region, as these areas share the same spinal nerve segments.</li>
+                        </ul>
+                        <div class="bg-gray-100 p-6 rounded-2xl text-center text-gray-500 italic border border-gray-300 mt-4">
+                            Placeholder for a detailed diagram of the heart's location and the layers of the pericardium.
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">1.2 The Four Chambers of Power and Blood Flow</h3>
+                        <p class="text-gray-700 mb-4 font-light">
+                            The heart is internally divided into four distinct chambers, separated by muscular septa. This separation ensures that oxygenated and deoxygenated blood do not mix.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 pl-4 space-y-1 font-light">
+                            <li>**Right Atrium**: This is the inflow chamber for deoxygenated blood from the body. It receives blood from the **superior vena cava** (draining the upper body), the **inferior vena cava** (draining the lower body), and the **coronary sinus** (draining the heart wall itself). The internal surface has a smooth posterior part (the sinus venarum) and an anterior part with muscular ridges known as **pectinate muscles**. A depression called the **oval fossa** is a remnant of the prenatal foramen ovale.</li>
+                            <li>**Right Ventricle**: This chamber receives deoxygenated blood from the right atrium and pumps it into the pulmonary trunk to be sent to the lungs. Its inner walls are characterized by a complex meshwork of muscular ridges, the **trabeculae carneae**. A prominent ridge, the **septomarginal trabecula** (or moderator band), is a key feature that carries a part of the conduction system to the anterior papillary muscle. The outflow tract is a smooth-walled cone called the **conus arteriosus**.</li>
+                            <li>**Left Atrium**: This chamber is thicker-walled than the right and receives oxygenated blood from the lungs via the **pulmonary veins**. Its walls are mostly smooth, with pectinate muscles confined to the auricle.</li>
+                            <li>**Left Ventricle**: As the main pump for the entire body, this is the thickest-walled and most powerful chamber. It receives oxygenated blood from the left atrium and pumps it into the aorta. Its outflow tract, the **aortic vestibule**, is a smooth-walled channel leading to the aortic valve.</li>
+                        </ul>
+                        <div class="bg-gray-100 p-6 rounded-2xl text-center text-gray-500 italic border border-gray-300 mt-4">
+                            Placeholder for an internal view of the heart's chambers and the direction of blood flow.
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">1.3 The Valves and Conduction System</h3>
+                        <p class="text-gray-700 mb-4 font-light">
+                            The heart's valves act as one-way gates, and its unique electrical system ensures coordinated contractions.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 pl-4 space-y-1 font-light">
+                            <li>**Atrioventricular (AV) Valves**: These prevent blood from flowing back from the ventricles into the atria. The **tricuspid valve** is on the right, and the **bicuspid (mitral) valve** is on the left. Their cusps are attached to **tendinous cords** (chordae tendinae), which are in turn anchored to the **papillary muscles** on the ventricular walls. The tendinous cords prevent the valve cusps from inverting under the high pressure of ventricular contraction.</li>
+                            <li>**Semilunar Valves**: The **pulmonary valve** and **aortic valve** are located at the outflow of the ventricles, preventing blood from flowing back into the heart after a contraction. The coronary arteries, which supply the heart muscle itself, arise from the sinuses located just above the right and left cusps of the aortic valve.</li>
+                            <li>**Conduction System**: The heart's electrical system starts with the **sinoatrial (SA) node**, the natural pacemaker, located at the junction of the right atrium and superior vena cava. The impulse spreads across the atria and is then delayed at the **atrioventricular (AV) node**, located in the interatrial septum. From there, the signal travels down the **AV bundle (of His)** and its branches to coordinate the powerful contraction of the ventricles, ensuring a synchronized heartbeat.</li>
+                        </ul>
+                        <div class="bg-gray-100 p-6 rounded-2xl text-center text-gray-500 italic border border-gray-300 mt-4">
+                            Placeholder for a diagram of the heart's valves and electrical conduction system.
+                        </div>
+                    </div>
+                </div>
+                <div id="heart-quiz-container" class="mt-6 p-4 border rounded-xl bg-gray-50 hidden"></div>
+                <div id="heart-tts-container" class="mt-6 p-4 border rounded-xl bg-gray-50 hidden"></div>
+                <div id="heart-flashcards-container" class="mt-6 p-4 border rounded-xl bg-gray-50 hidden font-light"></div>
+                <div id="heart-summary-container" class="mt-6 p-4 border rounded-xl bg-indigo-50 hidden font-light"></div>
+            </section>
+
+            <!-- Mission 2: Chart the Arterial Superhighways -->
+            <section class="bg-white card p-6 md:p-8 shadow-xl" id="arteries-section">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-3xl font-bold text-indigo-700">Mission 2: The Arteries</h2>
+                    <button onclick="document.getElementById('key-terms-section').scrollIntoView({ behavior: 'smooth' });" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button hidden md:inline-block">
+                        Key Terms
+                    </button>
+                </div>
+                <p class="text-gray-600 mb-6 font-light">
+                    From the heart, blood is pumped into a network of arteries. Let's trace the major routes that feed the head, neck, and upper limbs.
+                </p>
+
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <button onclick="generateQuiz('major arteries and their branches')" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                        Sparkle Quiz ✨
+                    </button>
+                    <button onclick="speakSection('arteries-section-content')" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                        Listen to Section 🔊
+                    </button>
+                    <button onclick="generateFlashcards('major arteries and their branches', 'arteries-flashcards-container')" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                        Create Flashcards ✨
+                    </button>
+                    <button onclick="generateSummary('arteries-section-content', 'arteries-summary-container')" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                        Quick Summary ✨
+                    </button>
+                </div>
+
+                <div id="arteries-section-content">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">2.1 The Great Divide: Aortic Arch Branches</h3>
+                        <p class="text-gray-700 mb-4 font-light">
+                            The **aortic arch** is the major trunk leaving the heart. On the right, it gives off the **brachiocephalic trunk**, which quickly divides into the right subclavian and right common carotid arteries. On the left, it gives off the **left common carotid artery** and the **left subclavian artery** directly. This anatomical difference is important for understanding the vascular supply to the upper body.
+                        </p>
+                        <div class="bg-gray-100 p-6 rounded-2xl text-center text-gray-500 italic border border-gray-300 mt-4">
+                            Placeholder for a diagram of the aortic arch and its major branches.
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">2.2 The Carotid Arteries: Head and Neck Supply</h3>
+                        <p class="text-gray-700 mb-4 font-light">
+                            The **common carotid artery** travels up the neck and splits at the carotid sinus into the **internal carotid** (which supplies the brain and eyes) and the **external carotid** (which supplies the face and superficial head). The external carotid artery has numerous branches that are vital for supplying the face, scalp, and glands:
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 pl-4 space-y-1 font-light">
+                            <li>**Superior Thyroid Artery**: Supplies the thyroid gland and larynx.</li>
+                            <li>**Lingual Artery**: Supplies the tongue, sublingual gland, and floor of the mouth.</li>
+                            <li>**Facial Artery**: A prominent branch that supplies the face, with branches like the superior and inferior labial arteries and the angular artery at its terminal end.</li>
+                            <li>**Occipital Artery**: Supplies the back of the head and deep neck muscles.</li>
+                            <li>**Posterior Auricular Artery**: Supplies the parotid gland, external ear, and scalp behind the ear.</li>
+                            <li>**Ascending Pharyngeal Artery**: A small but important branch that supplies the pharynx, tympanic cavity, and meninges.</li>
+                            <li>**Superficial Temporal Artery**: Supplies the parotid gland, masseter muscle, and lateral face. It is the terminal branch of the external carotid.</li>
+                            <li>**Maxillary Artery**: This is a major terminal branch of the external carotid artery, which is divided into three portions:
+                                <ul class="list-circle list-inside ml-8 space-y-1 font-light">
+                                    <li>**First (Mandibular) Portion**: Passes horizontally forward between the neck of the mandible and the sphenomandibular ligament. Its branches include the middle meningeal artery, deep auricular artery, anterior tympanic artery, and the inferior alveolar artery (which gives off the mental artery).</li>
+                                    <li>**Second (Pterygoid) Portion**: Runs obliquely forward and upward on the superficial surface of the lateral pterygoid muscle. Its branches include the masseteric artery, pterygoid branches, deep temporal arteries, and the buccal artery.</li>
+                                    <li>**Third (Pterygopalatine) Portion**: Lies in the pterygopalatine fossa and is considered the true terminal branch. Its branches are extensive, including the infraorbital artery, sphenopalatine artery, and descending palatine artery.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="bg-gray-100 p-6 rounded-2xl text-center text-gray-500 italic border border-gray-300 mt-4">
+                            Placeholder for a diagram of the carotid arteries and their branches.
+                        </div>
+                        <button onclick="generateMnemonic('the branches of the external carotid artery', 'carotid-mnemonic-container')" class="bg-fuchsia-500 hover:bg-fuchsia-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button mt-4">
+                            Create Mnemonic ✨
+                        </button>
+                        <div id="carotid-mnemonic-container" class="mt-4 p-4 border rounded-xl bg-gray-50 hidden font-light"></div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">2.3 The Subclavian Artery: Upper Limb's Lifeline</h3>
+                        <p class="text-gray-700 mb-4 font-light">
+                            The **subclavian artery** is the main route for blood to the upper limbs. It passes through the superior aperture of the thoracic cavity, goes between the anterior and middle scalene muscles, and at the lateral border of the first rib, it becomes the **axillary artery**. Its main branches include:
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 pl-4 space-y-1 font-light">
+                            <li>**Vertebral Artery**: Passes through the transverse foramens of the cervical vertebrae to supply the spinal cord, brain, and deep neck muscles. Inside the skull, the two vertebral arteries unite to form a single **basilar artery**, which then divides into two posterior cerebral arteries.</li>
+                            <li>**Internal Thoracic Artery**: Supplies the trachea, bronchi, thymus, pericardium, diaphragm, mammary gland, and the intercostal muscles.</li>
+                            <li>**Thyrocervical Trunk**: A short trunk that gives rise to arteries supplying the thyroid gland, larynx, and neck.</li>
+                            <li>**Costocervical Trunk**: Supplies the deep neck muscles and the first two intercostal spaces.</li>
+                            <li>**Axillary Artery**: A continuation of the subclavian artery, its branches include the lateral thoracic, subscapular, and anterior/posterior circumflex humeral arteries.</li>
+                            <li>**Brachial Artery**: The continuation of the axillary artery, it supplies the muscles of the arm and gives rise to the deep brachial artery, superior and inferior ulnar collateral arteries, before splitting into the **radial** and **ulnar** arteries. The radial and ulnar arteries further branch to form the superficial and deep palmar arches in the hand.</li>
+                        </ul>
+                        <div class="bg-gray-100 p-6 rounded-2xl text-center text-gray-500 italic border border-gray-300 mt-4">
+                            Placeholder for a diagram of the subclavian artery and its branches.
+                        </div>
+                        <button onclick="generateMnemonic('the branches of the subclavian artery', 'subclavian-mnemonic-container')" class="bg-fuchsia-500 hover:bg-fuchsia-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button mt-4">
+                            Create Mnemonic ✨
+                        </button>
+                        <div id="subclavian-mnemonic-container" class="mt-4 p-4 border rounded-xl bg-gray-50 hidden font-light"></div>
+                    </div>
+                </div>
+                <div id="arteries-quiz-container" class="mt-6 p-4 border rounded-xl bg-gray-50 hidden"></div>
+                <div id="arteries-tts-container" class="mt-6 p-4 border rounded-xl bg-gray-50 hidden"></div>
+                <div id="arteries-flashcards-container" class="mt-6 p-4 border rounded-xl bg-gray-50 hidden font-light"></div>
+                <div id="arteries-summary-container" class="mt-6 p-4 border rounded-xl bg-indigo-50 hidden font-light"></div>
+            </section>
+
+            <!-- Mission 3: Navigate the Venous Return Lanes -->
+            <section class="bg-white card p-6 md:p-8 shadow-xl mb-10" id="veins-section">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-3xl font-bold text-indigo-700">Mission 3: The Veins</h2>
+                    <button onclick="document.getElementById('key-terms-section').scrollIntoView({ behavior: 'smooth' });" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button hidden md:inline-block">
+                        Key Terms
+                    </button>
+                </div>
+                <p class="text-gray-600 mb-6 font-light">
+                    The final part of the circuit is the return trip. The veins are the highways that collect deoxygenated blood from the body and bring it back to the heart.
+                </p>
+
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <button onclick="generateQuiz('major veins, venous return, and special circulatory systems')" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                        Sparkle Quiz ✨
+                    </button>
+                    <button onclick="speakSection('veins-section-content')" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                        Listen to this Section 🔊
+                    </button>
+                    <button onclick="generateFlashcards('major veins, venous return, and special circulatory systems', 'veins-flashcards-container')" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                        Create Flashcards ✨
+                    </button>
+                    <button onclick="generateSummary('veins-section-content', 'veins-summary-container')" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                        Quick Summary ✨
+                    </button>
+                </div>
+
+                <div id="veins-section-content">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">3.1 The Main Return Trunks and Head Drainage</h3>
+                        <p class="text-gray-700 mb-4 font-light">
+                            The two great venous trunks are the **superior vena cava** (SVC), formed by the union of the right and left brachiocephalic veins, and the **inferior vena cava** (IVC), formed by the union of the right and left common iliac veins at the level of L5. These empty into the right atrium.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 pl-4 space-y-1 font-light">
+                            <li>**Internal Jugular Vein**: Drains blood from the brain and face. It arises as a continuation of the sigmoid sinuses at the base of the skull in the jugular foramen, and it unites with the subclavian vein to form the brachiocephalic vein.</li>
+                            <li>**External Jugular Vein**: Drains blood from the scalp and superficial neck muscles. It is formed by the union of the retromandibular vein and posterior auricular vein. It is a key superficial landmark in the neck.</li>
+                            <li>**Intracranial Venous Sinuses**: Located between the layers of the dura mater, these sinuses (e.g., Superior sagittal sinus, Inferior sagittal sinus, Straight sinus, Transverse sinus) receive blood from the brain before draining into the internal jugular veins.</li>
+                        </ul>
+                        <div class="bg-gray-100 p-6 rounded-2xl text-center text-gray-500 italic border border-gray-300 mt-4">
+                            Placeholder for a diagram of the major veins.
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">3.2 The Lymphatic System</h3>
+                        <p class="text-gray-700 mb-4 font-light">
+                            The lymphatic system is a parallel drainage network with three main functions: draining excess interstitial fluid, mounting an immune response, and transporting fats from the digestive system. Lymphatic vessels converge into larger ducts.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 pl-4 space-y-1 font-light">
+                            <li>**Thoracic Duct**: The largest lymphatic duct, approximately 40 cm long. It transports lymph from the entire lower half of the body and the left upper quadrant. It empties into the left venous angle (the junction of the left internal jugular vein and left subclavian vein).</li>
+                            <li>**Right Lymphatic Duct**: A much shorter duct (about 1 cm long), it collects lymph from the right upper quadrant of the body, including the right half of the head, neck, and right upper limb, and empties into the right venous angle.</li>
+                        </ul>
+                        <div class="bg-gray-100 p-6 rounded-2xl text-center text-gray-500 italic border border-gray-300 mt-4">
+                            Placeholder for a diagram of the lymphatic system.
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">3.3 Collateral Routes (Anastomoses)</h3>
+                        <p class="text-gray-700 mb-4 font-light">
+                            The body uses **anastomoses** (collateral communications) to ensure blood flow can bypass blockages. These are vital for maintaining circulation in the event of an obstruction.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 pl-4 space-y-1 font-light">
+                            <li>**Caval Anastomosis**: Connects the superior and inferior vena cava systems. A prime example is the **azygos system**, which can provide an alternative route for blood from the lower body to return to the SVC if the IVC is obstructed.</li>
+                            <li>**Portocaval Anastomosis**: This is a collateral communication between the portal venous system (which drains the GI tract) and the systemic venous system. It provides an important alternative route for portal blood to bypass the liver in case of portal hypertension.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-indigo-600 mb-2">3.4 Fetal and Postnatal Circulation</h3>
+                        <p class="text-gray-700 mb-4 font-light">
+                            Fetal circulation is a unique system designed for nutrient and gas exchange with the mother's placenta, bypassing the non-functional fetal lungs.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 pl-4 space-y-1 font-light">
+                            <li>**Fetal Circulation**: **Umbilical arteries** carry deoxygenated blood from the fetus to the placenta, and the single **umbilical vein** returns oxygenated blood to the fetus. The **foramen ovale** shunts blood from the right to left atrium, and the **ductus arteriosus** shunts blood from the pulmonary trunk to the aorta, bypassing the lungs.</li>
+                            <li>**Postnatal Changes**: After birth, these structures close and transform into ligaments. The **foramen ovale** becomes the oval fossa, the **ductus arteriosus** becomes the ligamentum arteriosum, and the **umbilical vein** becomes the ligamentum teres hepatis.</li>
+                        </ul>
+                        <div class="bg-gray-100 p-6 rounded-2xl text-center text-gray-500 italic border border-gray-300 mt-4">
+                            Placeholder for a diagram of fetal and postnatal circulation.
+                        </div>
+                    </div>
+                </div>
+                <div id="veins-quiz-container" class="mt-6 p-4 border rounded-xl bg-gray-50 hidden"></div>
+                <div id="veins-tts-container" class="mt-6 p-4 border rounded-xl bg-gray-50 hidden"></div>
+                <div id="veins-flashcards-container" class="mt-6 p-4 border rounded-xl bg-gray-50 hidden font-light"></div>
+                <div id="veins-summary-container" class="mt-6 p-4 border rounded-xl bg-indigo-50 hidden font-light"></div>
+            </section>
+        </div>
+
+        <!-- Key Terms Section -->
+        <section class="bg-white card p-6 md:p-8 shadow-xl mb-10" id="key-terms-section">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-4">Key Terms and Definitions</h2>
+            <p class="text-gray-600 mb-6 font-light">
+                A quick reference guide for some of the most important terms in the circulatory system.
+            </p>
+            <div class="space-y-4 text-gray-700 font-light">
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    <p class="font-semibold text-indigo-600">Pericardium</p>
+                    <p>A double-layered, fibroserous membrane that forms the sac surrounding the heart, providing protection and a frictionless environment.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    <p class="font-semibold text-indigo-600">Sinoatrial (SA) Node</p>
+                    <p>Known as the heart's natural pacemaker, this node initiates and coordinates the electrical impulses that control heart contractions.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    <p class="font-semibold text-indigo-600">Atrioventricular (AV) Valves</p>
+                    <p>Valves that separate the atria from the ventricles (tricuspid and bicuspid/mitral), preventing the backflow of blood.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    <p class="font-semibold text-indigo-600">Aortic Arch</p>
+                    <p>The main trunk of the aorta, from which the major arteries supplying the head, neck, and upper limbs branch off.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    <p class="font-semibold text-indigo-600">Internal Carotid Artery</p>
+                    <p>A major artery that branches from the common carotid and supplies the brain and eyes.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    <p class="font-semibold text-indigo-600">External Jugular Vein</p>
+                    <p>A vein that drains blood from the scalp and superficial neck, eventually leading to the superior vena cava.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    <p class="font-semibold text-indigo-600">Anastomosis</p>
+                    <p>A collateral communication or connection between blood vessels, which provides alternative routes for blood flow if a main vessel is blocked.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    <p class="font-semibold text-indigo-600">Trabeculae Carneae</p>
+                    <p>A meshwork of muscular ridges found on the internal walls of the ventricles.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    <p class="font-semibold text-indigo-600">Septomarginal Trabecula (Moderator Band)</p>
+                    <p>A muscular ridge in the right ventricle that carries part of the electrical conduction system to the anterior papillary muscle.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    <p class="font-semibold text-indigo-600">Oval Fossa</p>
+                    <p>A depression in the right interatrial septum, a remnant of the foramen ovale from fetal circulation.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    <p class="font-semibold text-indigo-600">Azygos System</p>
+                    <p>A system of veins that acts as a caval anastomosis, providing an alternative pathway for blood to return to the superior vena cava from the lower body.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    <p class="font-semibold text-indigo-600">Thoracic Duct</p>
+                    <p>The largest lymphatic duct, responsible for draining lymph from most of the body.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                    <p class="font-semibold text-indigo-600">Fetal Circulation</p>
+                    <p>A unique circulatory system present before birth, characterized by structures like the foramen ovale and ductus arteriosus, which bypass the fetal lungs.</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-2xl text-center text-gray-500 italic border border-gray-300 mt-4">
+                    Placeholder for additional key terms and images if needed.
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Tutor Section -->
+        <section class="bg-white card p-6 md:p-8 shadow-xl mb-10" id="tutor-section">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-4">Ask the AI Tutor ✨</h2>
+            <p class="text-gray-600 mb-4 font-light">
+                Have a question about the topics above? Type it in below and our AI tutor will provide a quick and helpful explanation. You can also paste an image URL to ask questions about a specific diagram.
+            </p>
+            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                <textarea id="tutor-input" class="flex-grow p-3 rounded-xl border-2 border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow duration-300" rows="3" placeholder="e.g., What is the function of the pericardium?"></textarea>
+                <input type="text" id="tutor-image-url" class="flex-grow p-3 rounded-xl border-2 border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow duration-300" placeholder="Paste an image URL here (optional)">
+                <button onclick="askTutor()" class="bg-teal-500 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-colors duration-300 md:self-end cta-button">
+                    Ask Tutor
+                </button>
+            </div>
+            <div id="tutor-response-container" class="mt-6 p-4 border rounded-xl bg-gray-50 hidden font-light"></div>
+        </section>
+
+        <!-- Quiz Modal -->
+        <div id="quizModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('quizModal')">&times;</span>
+                <div id="quiz-content"></div>
+            </div>
+        </div>
+
+        <!-- Flashcards Modal -->
+        <div id="flashcardModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('flashcardModal')">&times;</span>
+                <div id="flashcard-content"></div>
+            </div>
+        </div>
+        
+        <!-- Mnemonic Modal -->
+        <div id="mnemonicModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('mnemonicModal')">&times;</span>
+                <div id="mnemonic-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-indigo-700 text-white text-center p-4 rounded-t-3xl mt-10">
+        <p class="font-light">&copy; 2023 Human Anatomy Guide. All rights reserved. For educational purposes only.</p>
+    </footer>
+
+    <!-- Script for Gemini API Integrations -->
+    <script>
+        const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=";
+        const TTS_MODEL = "gemini-2.5-flash-preview-tts";
+
+        async function callApiWithBackoff(apiCall, retries = 3, delay = 1000) {
+            try {
+                return await apiCall();
+            } catch (error) {
+                if (retries > 0) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return callApiWithBackoff(apiCall, retries - 1, delay * 2);
+                } else {
+                    throw error;
+                }
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        async function generateQuiz(topic) {
+            const modal = document.getElementById('quizModal');
+            const quizContent = document.getElementById('quiz-content');
+
+            modal.style.display = 'flex';
+            quizContent.innerHTML = '<div class="text-center text-indigo-400 font-semibold flex items-center justify-center py-8">Loading quiz... <svg class="animate-spin ml-3 h-6 w-6 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.907l3-2.616z"></path></svg></div>';
+
+            const prompt = `Generate 3 multiple-choice questions about ${topic}, including the correct answer. Format the response as a JSON object with a 'questions' array. Each question object should have 'question' (string), 'options' (array of strings, exactly 4), and 'correct_answer' (string).`;
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: prompt }] }],
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "OBJECT",
+                        properties: {
+                            "questions": {
+                                type: "ARRAY",
+                                items: {
+                                    type: "OBJECT",
+                                    properties: {
+                                        "question": { "type": "STRING" },
+                                        "options": {
+                                            type: "ARRAY",
+                                            items: { "type": "STRING" },
+                                            minItems: 4,
+                                            maxItems: 4
+                                        },
+                                        "correct_answer": { "type": "STRING" }
+                                    },
+                                    "required": ["question", "options", "correct_answer"]
+                                }
+                            }
+                        },
+                        "required": ["questions"]
+                    }
+                }
+            };
+            
+            try {
+                const response = await callApiWithBackoff(() => fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }));
+                const result = await response.json();
+                
+                if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    const jsonString = result.candidates[0].content.parts[0].text;
+                    const data = JSON.parse(jsonString);
+                    renderQuiz(data.questions, quizContent);
+                } else {
+                    throw new Error("Invalid response format from API.");
+                }
+            } catch (error) {
+                console.error("Failed to generate quiz:", error);
+                quizContent.innerHTML = '<p class="text-center text-red-400">Error generating quiz. Please try again.</p>';
+            }
+        }
+
+        function renderQuiz(questions, container) {
+            if (!questions || questions.length === 0) {
+                container.innerHTML = '<p class="text-center text-gray-400">No questions were generated. Try a different topic!</p>';
+                return;
+            }
+
+            let score = 0;
+            let currentQuestion = 0;
+            let userAnswers = {};
+
+            function displayQuestion(qIndex) {
+                const q = questions[qIndex];
+                container.innerHTML = `
+                    <h3 class="text-2xl font-bold text-indigo-400 mb-6">Quiz Time! (${qIndex + 1}/${questions.length})</h3>
+                    <div class="bg-gray-700 p-6 rounded-xl">
+                        <p class="font-semibold text-gray-200 mb-5 text-lg">${q.question}</p>
+                        <div class="space-y-3">
+                            ${q.options.map((option, oIndex) => `
+                                <button
+                                    onclick="selectAnswer(this, '${q.correct_answer}', ${qIndex})"
+                                    class="w-full text-left p-4 rounded-lg border border-gray-600 hover:bg-gray-600 transition-colors duration-200 text-gray-200 font-light"
+                                    data-option="${option}"
+                                >
+                                    ${option}
+                                </button>
+                            `).join('')}
+                        </div>
+                        <div id="feedback-${qIndex}" class="mt-5 text-center font-bold"></div>
+                    </div>
+                `;
+            }
+
+            function selectAnswer(button, correctAnswer, qIndex) {
+                const feedbackDiv = document.getElementById(`feedback-${qIndex}`);
+                const selectedAnswer = button.getAttribute('data-option');
+                userAnswers[qIndex] = selectedAnswer;
+
+                const options = button.parentElement.children;
+                for (const opt of options) {
+                    opt.disabled = true;
+                    if (opt.textContent.trim() === correctAnswer.trim()) {
+                        opt.classList.add('bg-green-600', 'border-green-500');
+                    }
+                    if (opt.textContent.trim() === selectedAnswer.trim() && selectedAnswer.trim() !== correctAnswer.trim()) {
+                        opt.classList.add('bg-red-600', 'border-red-500');
+                    }
+                }
+                
+                if (selectedAnswer.trim() === correctAnswer.trim()) {
+                    score++;
+                    feedbackDiv.innerHTML = '<span class="text-green-400">Correct!</span>';
+                } else {
+                    feedbackDiv.innerHTML = `<span class="text-red-400">Incorrect. The answer was: ${correctAnswer}.</span>`;
+                }
+                
+                setTimeout(() => {
+                    currentQuestion++;
+                    if (currentQuestion < questions.length) {
+                        displayQuestion(currentQuestion);
+                    } else {
+                        showFinalScore();
+                    }
+                }, 1500);
+            }
+
+            function showFinalScore() {
+                container.innerHTML = `
+                    <h3 class="text-2xl font-bold text-indigo-400 mb-4">Quiz Complete!</h3>
+                    <p class="text-center text-3xl font-bold text-green-500">Your Score: ${score} / ${questions.length}</p>
+                    <button onclick="closeModal('quizModal');" class="mt-6 w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                        Close
+                    </button>
+                `;
+            }
+
+            displayQuestion(currentQuestion);
+        }
+
+        async function generateMnemonic(topic) {
+            const mnemonicModal = document.getElementById('mnemonicModal');
+            const mnemonicContent = document.getElementById('mnemonic-content');
+
+            mnemonicModal.style.display = 'flex';
+            mnemonicContent.innerHTML = '<div class="text-center text-fuchsia-400 font-semibold flex items-center justify-center py-8">Crafting mnemonics... <svg class="animate-spin ml-3 h-6 w-6 text-fuchsia-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.907l3-2.616z"></path></svg></div>';
+
+            const prompt = `Generate 3 creative and easy-to-remember mnemonics to help an anatomy student memorize the branches of ${topic}. Provide each mnemonic on a new line.`;
+            const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+
+            try {
+                const response = await callApiWithBackoff(() => fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }));
+                const result = await response.json();
+                
+                if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    const mnemonics = result.candidates[0].content.parts[0].text.split('\n').filter(m => m.trim() !== '');
+                    mnemonicContent.innerHTML = `
+                        <h3 class="text-2xl font-bold text-fuchsia-400 mb-6">Mnemonic Suggestions</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            ${mnemonics.map(m => `<li class="font-light">${m}</li>`).join('')}
+                        </ul>
+                        <button onclick="generateMnemonic('${topic}')" class="mt-6 w-full bg-fuchsia-500 hover:bg-fuchsia-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                            Generate More Mnemonics
+                        </button>
+                    `;
+                } else {
+                    throw new Error("Invalid response format from API.");
+                }
+            } catch (error) {
+                console.error("Failed to generate mnemonics:", error);
+                mnemonicContent.innerHTML = '<p class="text-center text-red-400">Error generating mnemonics. Please try again.</p>';
+            }
+        }
+
+        async function generateAnatomyFact() {
+            const factContainer = document.getElementById('fact-container');
+            factContainer.classList.remove('hidden');
+            factContainer.innerHTML = '<div class="text-white font-semibold flex items-center justify-center py-2">Generating fact... <svg class="animate-spin ml-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.907l3-2.616z"></path></svg></div>';
+
+            const prompt = `Generate one short, interesting, and lesser-known fact about the human circulatory system. The fact should be no more than two sentences.`;
+            const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+
+            try {
+                const response = await callApiWithBackoff(() => fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }));
+                const result = await response.json();
+                
+                if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    const factText = result.candidates[0].content.parts[0].text;
+                    factContainer.innerHTML = `<p class="font-light">${factText}</p>`;
+                } else {
+                    throw new Error("Invalid response format from API.");
+                }
+            } catch (error) {
+                console.error("Failed to generate fact:", error);
+                factContainer.innerHTML = '<p class="text-center text-red-400">Error generating fact. Please try again.</p>';
+            }
+        }
+
+        async function askTutor() {
+            const inputElement = document.getElementById('tutor-input');
+            const imageInputElement = document.getElementById('tutor-image-url');
+            const question = inputElement.value.trim();
+            const imageUrl = imageInputElement.value.trim();
+            const responseContainer = document.getElementById('tutor-response-container');
+
+            if (!question && !imageUrl) {
+                responseContainer.innerHTML = '<p class="text-red-400">Please enter a question or an image URL.</p>';
+                responseContainer.classList.remove('hidden');
+                return;
+            }
+
+            responseContainer.innerHTML = '<div class="text-center text-teal-400 font-semibold flex items-center justify-center py-4">Thinking... <svg class="animate-spin ml-3 h-6 w-6 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.907l3-2.616z"></path></svg></div>';
+            responseContainer.classList.remove('hidden');
+            
+            const prompt = `You are an enthusiastic and helpful human anatomy tutor. Your task is to provide a clear and concise explanation for the user's question.`;
+            
+            let parts = [{ text: `${prompt}\nUser's question: ${question}` }];
+            let payload = { contents: [{ role: "user", parts: parts }] };
+
+            if (imageUrl) {
+                try {
+                    const imageResponse = await fetch(imageUrl);
+                    if (!imageResponse.ok) throw new Error(`Could not fetch image from URL: ${imageUrl}`);
+                    const blob = await imageResponse.blob();
+                    const reader = new FileReader();
+                    await new Promise(resolve => {
+                        reader.onloadend = () => {
+                            const base64Data = reader.result.split(',')[1];
+                            parts.push({
+                                inlineData: {
+                                    mimeType: blob.type,
+                                    data: base64Data
+                                }
+                            });
+                            payload.contents[0].parts = parts;
+                            resolve();
+                        };
+                        reader.readAsDataURL(blob);
+                    });
+                } catch (error) {
+                    console.error("Image processing error:", error);
+                    responseContainer.innerHTML = '<p class="text-center text-red-400">Error processing image. Please ensure the URL is valid and the image is publicly accessible.</p>';
+                    return;
+                }
+            }
+
+            try {
+                const response = await callApiWithBackoff(() => fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }));
+                const result = await response.json();
+                
+                if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    const tutorResponse = result.candidates[0].content.parts[0].text;
+                    responseContainer.innerHTML = `
+                        <h3 class="text-xl font-bold text-teal-400 mb-2">AI Tutor:</h3>
+                        <p class="text-gray-300 font-light">${tutorResponse}</p>
+                    `;
+                } else {
+                    throw new Error("Invalid response format from API.");
+                }
+            } catch (error) {
+                console.error("AI Tutor error:", error);
+                responseContainer.innerHTML = '<p class="text-center text-red-400">Sorry, I\'m having trouble. Please try asking again later!</p>';
+            }
+        }
+        
+        async function speakSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const ttsContainer = document.getElementById(`${sectionId.split('-')[0]}-tts-container`);
+            const contentToSpeak = section.textContent.trim().replace(/Sparkle Quiz ✨|Create Flashcards ✨|Quick Summary ✨|Ask Tutor|Close Quiz|Listen to this Section 🔊|Key Terms|Anatomy Fact of the Day ✨/g, '').replace(/\s+/g, ' ');
+            
+            if (contentToSpeak.length === 0) {
+                ttsContainer.innerHTML = '<p class="text-red-400">No content to read.</p>';
+                ttsContainer.classList.remove('hidden');
+                return;
+            }
+            
+            ttsContainer.innerHTML = '<div class="text-center text-indigo-400 font-semibold flex items-center justify-center py-4">Generating audio... <svg class="animate-spin ml-3 h-6 w-6 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.907l3-2.616z"></path></svg></div>';
+            ttsContainer.classList.remove('hidden');
+            
+            const payload = {
+                contents: [{ parts: [{ text: contentToSpeak }] }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Puck" } } }
+                },
+                model: TTS_MODEL
+            };
+
+            try {
+                const response = await callApiWithBackoff(() => fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }));
+                const result = await response.json();
+                
+                const part = result?.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
+
+                if (audioData && mimeType && mimeType.startsWith("audio/")) {
+                    function base64ToArrayBuffer(base64) {
+                        const binaryString = window.atob(base64);
+                        const len = binaryString.length;
+                        const bytes = new Uint8Array(len);
+                        for (let i = 0; i < len; i++) { bytes[i] = binaryString.charCodeAt(i); }
+                        return bytes.buffer;
+                    }
+                    function pcmToWav(pcmData, sampleRate) {
+                        const pcm16 = new Int16Array(pcmData);
+                        const buffer = new ArrayBuffer(44 + pcm16.length * 2);
+                        const view = new DataView(buffer);
+                        writeString(view, 0, 'RIFF');
+                        view.setUint32(4, 36 + pcm16.length * 2, true);
+                        writeString(view, 8, 'WAVE');
+                        writeString(view, 12, 'fmt ');
+                        view.setUint32(16, 16, true);
+                        view.setUint16(20, 1, true);
+                        view.setUint16(22, 1, true);
+                        view.setUint32(24, sampleRate, true);
+                        view.setUint32(28, sampleRate * 2, true);
+                        view.setUint16(32, 2, true);
+                        view.setUint16(34, 16, true);
+                        writeString(view, 36, 'data');
+                        view.setUint32(40, pcm16.length * 2, true);
+                        for (let i = 0; i < pcm16.length; i++) { view.setInt16(44 + i * 2, pcm16[i], true); }
+                        return new Blob([view], { type: 'audio/wav' });
+                    }
+                    function writeString(view, offset, string) {
+                        for (let i = 0; i < string.length; i++) { view.setUint8(offset + i, string.charCodeAt(i)); }
+                    }
+                    
+                    const sampleRate = 24000;
+                    const pcmData = base64ToArrayBuffer(audioData);
+                    const wavBlob = pcmToWav(pcmData, sampleRate);
+                    const audioUrl = URL.createObjectURL(wavBlob);
+                    
+                    container.innerHTML = `<audio controls autoplay src="${audioUrl}"></audio>`;
+
+                } else {
+                    throw new Error("Invalid audio data from API.");
+                }
+            } catch (error) {
+                console.error("Failed to generate TTS:", error);
+                container.innerHTML = '<p class="text-center text-red-400">Error generating audio. Please try again.</p>';
+            }
+        }
+
+        async function generateFlashcards(topic, containerId) {
+            const flashcardContainer = document.getElementById(containerId);
+            flashcardContainer.innerHTML = '<div class="text-center text-purple-400 font-semibold flex items-center justify-center py-4">Creating flashcards... <svg class="animate-spin ml-3 h-5 w-5 text-purple-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.907l3-2.616z"></path></svg></div>';
+            flashcardContainer.classList.remove('hidden');
+
+            const prompt = `Generate 5 flashcards for an anatomy student about ${topic}. Each flashcard should have a 'term' and a 'definition'. Format the response as a JSON array of objects. Each object should have 'term' (string) and 'definition' (string). The definitions should be concise and accurate for learning purposes.`;
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: prompt }] }],
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "ARRAY",
+                        items: {
+                            type: "OBJECT",
+                            properties: {
+                                "term": { "type": "STRING" },
+                                "definition": { "type": "STRING" }
+                            },
+                            "required": ["term", "definition"]
+                        }
+                    }
+                }
+            };
+            
+            try {
+                const response = await callApiWithBackoff(() => fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }));
+                const result = await response.json();
+                
+                if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    const jsonString = result.candidates[0].content.parts[0].text;
+                    const flashcards = JSON.parse(jsonString);
+                    renderFlashcards(flashcards, flashcardContainer);
+                } else {
+                    throw new Error("Invalid response format from API.");
+                }
+            } catch (error) {
+                console.error("Failed to generate flashcards:", error);
+                flashcardContainer.innerHTML = '<p class="text-center text-red-400">Error generating flashcards. Please try again.</p>';
+            }
+        }
+
+        function renderFlashcards(flashcards, container) {
+            if (!flashcards || flashcards.length === 0) {
+                container.innerHTML = '<p class="text-center text-gray-400">No flashcards were generated.</p>';
+                return;
+            }
+
+            let currentIndex = 0;
+            const flashcardContent = document.createElement('div');
+            flashcardContent.id = 'flashcard-content-inner';
+
+            function displayFlashcard(index) {
+                const card = flashcards[index];
+                flashcardContent.innerHTML = `
+                    <div id="flashcard-card" class="bg-gray-700 p-6 rounded-xl border-2 border-indigo-500 transform transition-transform duration-500 cursor-pointer text-center flex flex-col justify-center items-center h-64">
+                        <div class="flashcard-front">
+                            <h4 class="font-bold text-indigo-300 text-2xl">${card.term}</h4>
+                        </div>
+                        <div class="flashcard-back hidden">
+                            <p class="text-gray-200 text-lg">${card.definition}</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mt-4">
+                        <button onclick="navigateFlashcards(-1)" class="bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300">&lt; Prev</button>
+                        <span class="text-sm text-gray-400">${index + 1} / ${flashcards.length}</span>
+                        <button onclick="navigateFlashcards(1)" class="bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300">Next &gt;</button>
+                    </div>
+                `;
+                const cardElement = flashcardContent.querySelector('#flashcard-card');
+                const front = cardElement.querySelector('.flashcard-front');
+                const back = cardElement.querySelector('.flashcard-back');
+                
+                cardElement.onclick = () => {
+                    if (front.classList.contains('hidden')) {
+                        front.classList.remove('hidden');
+                        back.classList.add('hidden');
+                    } else {
+                        front.classList.add('hidden');
+                        back.classList.remove('hidden');
+                    }
+                };
+            }
+
+            window.navigateFlashcards = (direction) => {
+                currentIndex = (currentIndex + direction + flashcards.length) % flashcards.length;
+                displayFlashcard(currentIndex);
+            };
+
+            container.innerHTML = `
+                <h3 class="text-2xl font-bold text-indigo-400 mb-6">Flashcards!</h3>
+                ${flashcardContent.outerHTML}
+                <button onclick="closeModal('flashcardModal')" class="mt-6 w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-colors duration-300 cta-button">
+                    Close
+                </button>
+            `;
+            container.classList.remove('hidden');
+            displayFlashcard(currentIndex);
+
+            // Open the flashcard modal
+            const flashcardModal = document.getElementById('flashcardModal');
+            const flashcardModalContent = flashcardModal.querySelector('.modal-content');
+            flashcardModalContent.innerHTML = container.innerHTML;
+            flashcardModal.style.display = 'flex';
+        }
+        
+        async function generateSummary(sectionId, containerId) {
+            const section = document.getElementById(sectionId);
+            const summaryContainer = document.getElementById(containerId);
+            const contentToSummarize = section.textContent.trim().replace(/Sparkle Quiz ✨|Create Flashcards ✨|Quick Summary ✨|Ask Tutor|Close Quiz|Listen to this Section 🔊|Key Terms|Anatomy Fact of the Day ✨/g, '').replace(/\s+/g, ' ');
+
+            if (contentToSummarize.length < 100) {
+                summaryContainer.innerHTML = '<p class="text-red-400">Not enough content to summarize effectively.</p>';
+                summaryContainer.classList.remove('hidden');
+                return;
+            }
+
+            summaryContainer.innerHTML = '<div class="text-center text-green-400 font-semibold flex items-center justify-center py-4">Generating summary... <svg class="animate-spin ml-3 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.907l3-2.616z"></path></svg></div>';
+            summaryContainer.classList.remove('hidden');
+            
+            const prompt = `Read the following text about human anatomy and provide a concise, bullet-point summary of the key takeaways. The summary should be easy to read and no more than 5 points. \n\nText: ${contentToSummarize}`;
+            const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig: { responseMimeType: "text/plain" } };
+
+            try {
+                const response = await callApiWithBackoff(() => fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }));
+                const result = await response.json();
+                
+                if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    const summaryText = result.candidates[0].content.parts[0].text;
+                    summaryContainer.innerHTML = `
+                        <h4 class="font-bold text-green-400 mb-2">Summary:</h4>
+                        <p class="font-light whitespace-pre-wrap text-gray-300">${summaryText}</p>
+                        <button onclick="speakText('${encodeURIComponent(summaryText)}', 'summary-tts-container')" class="mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300 cta-button">
+                            Listen to Summary 🔊
+                        </button>
+                        <div id="summary-tts-container" class="mt-4 hidden"></div>
+                    `;
+                } else {
+                    throw new Error("Invalid response format from API.");
+                }
+            } catch (error) {
+                console.error("Failed to generate summary:", error);
+                summaryContainer.innerHTML = '<p class="text-center text-red-400">Error generating summary. Please try again.</p>';
+            }
+        }
+        
+        async function speakText(text, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '<div class="text-center text-indigo-400 font-semibold flex items-center justify-center py-4">Generating audio... <svg class="animate-spin ml-3 h-6 w-6 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.907l3-2.616z"></path></svg></div>';
+            container.classList.remove('hidden');
+            
+            const payload = {
+                contents: [{ parts: [{ text: decodeURIComponent(text) }] }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Puck" } } }
+                },
+                model: TTS_MODEL
+            };
+
+            try {
+                const response = await callApiWithBackoff(() => fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }));
+                const result = await response.json();
+                
+                const part = result?.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
+
+                if (audioData && mimeType && mimeType.startsWith("audio/")) {
+                    function base64ToArrayBuffer(base64) {
+                        const binaryString = window.atob(base64);
+                        const len = binaryString.length;
+                        const bytes = new Uint8Array(len);
+                        for (let i = 0; i < len; i++) { bytes[i] = binaryString.charCodeAt(i); }
+                        return bytes.buffer;
+                    }
+                    function pcmToWav(pcmData, sampleRate) {
+                        const pcm16 = new Int16Array(pcmData);
+                        const buffer = new ArrayBuffer(44 + pcm16.length * 2);
+                        const view = new DataView(buffer);
+                        writeString(view, 0, 'RIFF');
+                        view.setUint32(4, 36 + pcm16.length * 2, true);
+                        writeString(view, 8, 'WAVE');
+                        writeString(view, 12, 'fmt ');
+                        view.setUint32(16, 16, true);
+                        view.setUint16(20, 1, true);
+                        view.setUint16(22, 1, true);
+                        view.setUint32(24, sampleRate, true);
+                        view.setUint32(28, sampleRate * 2, true);
+                        view.setUint16(32, 2, true);
+                        view.setUint16(34, 16, true);
+                        writeString(view, 36, 'data');
+                        view.setUint32(40, pcm16.length * 2, true);
+                        for (let i = 0; i < pcm16.length; i++) { view.setInt16(44 + i * 2, pcm16[i], true); }
+                        return new Blob([view], { type: 'audio/wav' });
+                    }
+                    function writeString(view, offset, string) {
+                        for (let i = 0; i < string.length; i++) { view.setUint8(offset + i, string.charCodeAt(i)); }
+                    }
+                    
+                    const sampleRate = 24000;
+                    const pcmData = base64ToArrayBuffer(audioData);
+                    const wavBlob = pcmToWav(pcmData, sampleRate);
+                    const audioUrl = URL.createObjectURL(wavBlob);
+                    
+                    container.innerHTML = `<audio controls autoplay src="${audioUrl}"></audio>`;
+
+                } else {
+                    throw new Error("Invalid audio data from API.");
+                }
+            } catch (error) {
+                console.error("Failed to generate TTS:", error);
+                container.innerHTML = '<p class="text-center text-red-400">Error generating audio. Please try again.</p>';
+            }
+        }
+        
+        window.addEventListener('load', () => {
+            const quizModal = document.getElementById('quizModal');
+            const flashcardModal = document.getElementById('flashcardModal');
+            window.onclick = (event) => {
+                if (event.target == quizModal) {
+                    closeModal('quizModal');
+                }
+                if (event.target == flashcardModal) {
+                    closeModal('flashcardModal');
+                }
+            };
+        });
+    </script>
+</body>
+</html>
