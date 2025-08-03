@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Human Anatomy: The Circulatory System</title>
-    <!--
-        This is a redefined, premium-level guide for the human circulatory system.
-        The design is inspired by modern, clean aesthetics with a focus on
-        improved navigation, seamless interactive features, and a sophisticated feel.
-    -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600&display=swap');
@@ -108,7 +103,6 @@
 
     <div class="container mx-auto p-4 md:p-8">
 
-        <!-- Header Section -->
         <header class="header-bg text-white rounded-3xl p-6 md:p-12 shadow-2xl mb-12">
             <h1 class="text-4xl md:text-5xl font-bold mb-3">The Human Circulatory System: An Adventure!</h1>
             <p class="text-lg md:text-xl opacity-90 font-light mb-4">
@@ -122,7 +116,6 @@
             </div>
         </header>
 
-        <!-- Navigation Menu - Quick Links -->
         <nav class="bg-white card shadow-xl p-6 mb-12">
             <h3 class="text-xl font-bold text-indigo-400 mb-4">Jump to Section</h3>
             <ul class="flex flex-wrap gap-4 text-sm md:text-base">
@@ -134,10 +127,8 @@
             </ul>
         </nav>
 
-        <!-- Main Content Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            <!-- Mission 1: The Heart - The Engine Room -->
             <section class="bg-white card p-6 md:p-8 shadow-xl" id="heart-section">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-3xl font-bold text-indigo-700">Mission 1: The Heart</h2>
@@ -218,7 +209,6 @@
                 <div id="heart-summary-container" class="mt-6 p-4 border rounded-xl bg-indigo-50 hidden font-light"></div>
             </section>
 
-            <!-- Mission 2: Chart the Arterial Superhighways -->
             <section class="bg-white card p-6 md:p-8 shadow-xl" id="arteries-section">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-3xl font-bold text-indigo-700">Mission 2: The Arteries</h2>
@@ -314,7 +304,6 @@
                 <div id="arteries-summary-container" class="mt-6 p-4 border rounded-xl bg-indigo-50 hidden font-light"></div>
             </section>
 
-            <!-- Mission 3: Navigate the Venous Return Lanes -->
             <section class="bg-white card p-6 md:p-8 shadow-xl mb-10" id="veins-section">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-3xl font-bold text-indigo-700">Mission 3: The Veins</h2>
@@ -403,7 +392,6 @@
             </section>
         </div>
 
-        <!-- Key Terms Section -->
         <section class="bg-white card p-6 md:p-8 shadow-xl mb-10" id="key-terms-section">
             <h2 class="text-3xl font-bold text-indigo-700 mb-4">Key Terms and Definitions</h2>
             <p class="text-gray-600 mb-6 font-light">
@@ -468,7 +456,6 @@
             </div>
         </section>
 
-        <!-- AI Tutor Section -->
         <section class="bg-white card p-6 md:p-8 shadow-xl mb-10" id="tutor-section">
             <h2 class="text-3xl font-bold text-indigo-700 mb-4">Ask the AI Tutor ✨</h2>
             <p class="text-gray-600 mb-4 font-light">
@@ -484,7 +471,6 @@
             <div id="tutor-response-container" class="mt-6 p-4 border rounded-xl bg-gray-50 hidden font-light"></div>
         </section>
 
-        <!-- Quiz Modal -->
         <div id="quizModal" class="modal">
             <div class="modal-content">
                 <span class="close-button" onclick="closeModal('quizModal')">&times;</span>
@@ -492,7 +478,6 @@
             </div>
         </div>
 
-        <!-- Flashcards Modal -->
         <div id="flashcardModal" class="modal">
             <div class="modal-content">
                 <span class="close-button" onclick="closeModal('flashcardModal')">&times;</span>
@@ -500,7 +485,6 @@
             </div>
         </div>
         
-        <!-- Mnemonic Modal -->
         <div id="mnemonicModal" class="modal">
             <div class="modal-content">
                 <span class="close-button" onclick="closeModal('mnemonicModal')">&times;</span>
@@ -509,12 +493,10 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-indigo-700 text-white text-center p-4 rounded-t-3xl mt-10">
         <p class="font-light">&copy; 2023 Human Anatomy Guide. All rights reserved. For educational purposes only.</p>
     </footer>
 
-    <!-- Script for Gemini API Integrations -->
     <script>
         const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=AIzaSyB6LFqYVpdKLWw4mFe3oYfjM8RDDv2A1_M";
         const TTS_MODEL = "gemini-2.5-flash-preview-tts";
@@ -1135,5 +1117,3 @@
     </script>
 </body>
 </html>
-
-
